@@ -44,6 +44,7 @@
 		AB9A07552C860D720090F57E /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9A070C2C85F2CD0090F57E /* Router.swift */; };
 		AB9A07562C860D770090F57E /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9A070D2C85F2CD0090F57E /* ServiceManager.swift */; };
 		AB9A07582C860DA80090F57E /* MovieDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9A07572C860DA80090F57E /* MovieDetailsResponse.swift */; };
+		AB9A075B2C8611F10090F57E /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9A075A2C8611F10090F57E /* MovieCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +101,7 @@
 		AB9A074B2C85F5F00090F57E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		AB9A07522C860CA60090F57E /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		AB9A07572C860DA80090F57E /* MovieDetailsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailsResponse.swift; sourceTree = "<group>"; };
+		AB9A075A2C8611F10090F57E /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -272,10 +274,19 @@
 		AB9A074A2C85F5CE0090F57E /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				AB9A07592C8611D80090F57E /* Cell */,
 				AB9A074B2C85F5F00090F57E /* HomeViewController.swift */,
 				AB9A07522C860CA60090F57E /* HomeViewModel.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		AB9A07592C8611D80090F57E /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				AB9A075A2C8611F10090F57E /* MovieCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -422,6 +433,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB9A075B2C8611F10090F57E /* MovieCell.swift in Sources */,
 				AB9A07352C85F2F20090F57E /* UIApplication+Extensions.swift in Sources */,
 				AB9A07322C85F2F20090F57E /* NibOwnerLoadable.swift in Sources */,
 				AB9A072F2C85F2F20090F57E /* Array+Extensions.swift in Sources */,

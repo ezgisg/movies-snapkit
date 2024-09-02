@@ -22,9 +22,7 @@ class HomeViewController: UIViewController {
         viewModel.delegate = self
         viewModel.fetchNowPlayingMovies(page: 1)
     }
-
 }
-
 
 private extension HomeViewController {
     final func setupUI() {
@@ -33,8 +31,8 @@ private extension HomeViewController {
         
         DispatchQueue.main.async {  [weak self] in
             guard let self else { return }
-            view.backgroundColor = .purple
-            tableView.backgroundColor = .blue
+            view.backgroundColor = .systemYellow
+            tableView.backgroundColor = .white
         }
         
         makeSearchBar()
@@ -42,6 +40,8 @@ private extension HomeViewController {
     }
     
     final func makeSearchBar() {
+        searchBar.layer.cornerRadius = 8
+        searchBar.clipsToBounds = true
         searchBar.snp.makeConstraints { make in
             make.height.equalTo(60)
             make.left.equalToSuperview().offset(10)
@@ -52,6 +52,8 @@ private extension HomeViewController {
     
     final func makeTableView() {
         tableView.dataSource = self
+        tableView.register(cellWithClass: MovieCell.self)
+        tableView.estimatedRowHeight = 200
         tableView.snp.makeConstraints { make in
             make.right.left.equalToSuperview()
             make.top.equalTo(searchBar.snp.bottom).offset(10)
@@ -66,7 +68,9 @@ extension HomeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withClass: MovieCell.self)
+        cell.configure(result: viewModel.movies?.results?[indexPath.row])
+        return cell
     }
     
 }
@@ -74,6 +78,5 @@ extension HomeViewController: UITableViewDataSource {
 extension HomeViewController: HomeViewModelDelegate {
     func reloadData() {
         tableView.reloadData()
-        print(viewModel.movies)
     }
 }

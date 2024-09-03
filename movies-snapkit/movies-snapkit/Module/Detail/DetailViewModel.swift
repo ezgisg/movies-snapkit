@@ -11,20 +11,24 @@ import Foundation
 protocol DetailViewModelProtocol: AnyObject {
     var movieID: Int { get set }
     var movieDetail: MovieDetailsResponse? { get set }
+    var similars: MoviesResponse?  { get set }
     var delegate: DetailViewModelDelegate? { get set }
     
     func fetchDetail()
+    func fetchSimilars()
 }
 
 //MARK: - DetailViewModelDelegate
 protocol DetailViewModelDelegate: AnyObject {
     func reloadData()
+    func configureData()
 }
 
 //MARK: - DetailViewModel
 final class DetailViewModel {
     var movieID: Int
     var movieDetail: MovieDetailsResponse?
+    var similars: MoviesResponse?
     weak var delegate: DetailViewModelDelegate?
     private var service = MoviesService()
   
@@ -42,6 +46,19 @@ extension DetailViewModel: DetailViewModelProtocol {
             switch result {
             case .success(let data):
                 movieDetail = data
+                delegate?.configureData()
+            case .failure(let error):
+                debugPrint(error.localizedDescription)
+            }
+        }
+    }
+    
+    func fetchSimilars() {
+        service.fetchSimilarMovies(page: 1, movieId: Int32(movieID)) {  [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(let data):
+                similars = data
                 delegate?.reloadData()
             case .failure(let error):
                 debugPrint(error.localizedDescription)

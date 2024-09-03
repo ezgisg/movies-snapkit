@@ -38,6 +38,10 @@ public extension UICollectionView {
     func register<T: UICollectionViewCell>(cellTypes: [T.Type], bundle: Bundle? = nil) {
         cellTypes.forEach { register(cellType: $0, bundle: bundle) }
     }
+    
+    func register<T: UICollectionViewCell>(cellWithClass name: T.Type) {
+        register(T.self, forCellWithReuseIdentifier: String(describing: name))
+    }
 
     func dequeueReusableCell<T: UICollectionViewCell>(with type: T.Type, for indexPath: IndexPath) -> T {
         guard let cell = self.dequeueReusableCell(withReuseIdentifier: type.className, for: indexPath) as? T else { fatalError("can not dequeue cell \(type)") }

@@ -29,9 +29,12 @@ class DetailViewController: UIViewController {
     let collectionViewTitleContainer: UIView = UIView()
     let collectionViewTitle: UILabel = UILabel()
     
-    let collectionView: UICollectionView = {
+    var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 8
+        layout.minimumInteritemSpacing = 8
+        layout.itemSize = CGSize(width: 140, height: 200)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
@@ -48,6 +51,7 @@ class DetailViewController: UIViewController {
         view.backgroundColor = .white
         viewModel.delegate = self
         viewModel.fetchDetail()
+        viewModel.fetchSimilars()
         setupUI()
     }
     
@@ -63,6 +67,7 @@ class DetailViewController: UIViewController {
     
 }
 
+//MARK: - UI Setups
 private extension DetailViewController {
     final func setupUI() {
         
@@ -179,16 +184,24 @@ private extension DetailViewController {
     }
     
     final func makeCollectionViewTitleContainer() {
-        
+        collectionViewTitleContainer.snp.makeConstraints { make in
+            make.top.equalTo(collectionViewTitle.snp.top).offset(-6)
+            make.bottom.equalTo(collectionViewTitle.snp.bottom).offset(6)
+        }
     }
     
     final func makeCollectionViewTitle() {
-        
+        collectionViewTitle.text = "Similar Movies"
+        collectionViewTitle.font = .boldSystemFont(ofSize: 20)
+        collectionViewTitle.snp.makeConstraints { make in
+            make.left.equalTo(collectionViewTitleContainer.snp.left).offset(12)
+            make.right.equalTo(collectionViewTitleContainer.snp.right).offset(-12)
+        }
     }
     
     final func makeCollectionView() {
         collectionView.dataSource = self
-        collectionView.backgroundColor = .systemPink
+        collectionView.register(cellWithClass: SimilarMovieCell.self)
         collectionView.snp.makeConstraints { make in
             make.height.equalTo(200)
             make.top.equalTo(verticalStack.snp.bottom)
@@ -199,9 +212,13 @@ private extension DetailViewController {
     
 }
 
+//MARK: - DetailViewModelDelegate
 extension DetailViewController: DetailViewModelDelegate {
     func reloadData() {
-        //        collectionView.reloadData()
+        collectionView.reloadData()
+    }
+    
+    func configureData() {
         guard let detail = viewModel.movieDetail else { return }
         topImage.loadImage(with: detail.backdrop_path ?? "")
         titleLabel.text = detail.title
@@ -223,17 +240,20 @@ extension DetailViewController: DetailViewModelDelegate {
         collectionView.snp.makeConstraints() { make in
             make.bottom.lessThanOrEqualTo(view.safeAreaLayoutGuide.snp.bottom)
         }
-        
     }
 }
 
+//MARK: - UICollectionViewDataSource
 extension DetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        return viewModel.similars?.results?.count ?? 0
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        UICollectionViewCell()
+        let cell = collectionView.dequeueReusableCell(with: SimilarMovieCell.self, for: indexPath)
+        guard let data = viewModel.similars?.results?[indexPath.row] else { return cell}
+        cell.configure(data: data)
+        return cell
     }
     
 }

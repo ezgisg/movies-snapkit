@@ -47,6 +47,7 @@
 		AB9A075B2C8611F10090F57E /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9A075A2C8611F10090F57E /* MovieCell.swift */; };
 		AB9E209C2C86E4E2001F707F /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9E209B2C86E4E2001F707F /* DetailViewController.swift */; };
 		AB9E209E2C86E4EE001F707F /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9E209D2C86E4EE001F707F /* DetailViewModel.swift */; };
+		ABB3E6022C8744450054E7DF /* SimilarMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB3E6012C8744450054E7DF /* SimilarMovieCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +107,7 @@
 		AB9A075A2C8611F10090F57E /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		AB9E209B2C86E4E2001F707F /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		AB9E209D2C86E4EE001F707F /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		ABB3E6012C8744450054E7DF /* SimilarMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimilarMovieCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -297,10 +299,19 @@
 		AB9E209A2C86E4C2001F707F /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				ABB3E6002C87442B0054E7DF /* Cell */,
 				AB9E209B2C86E4E2001F707F /* DetailViewController.swift */,
 				AB9E209D2C86E4EE001F707F /* DetailViewModel.swift */,
 			);
 			path = Detail;
+			sourceTree = "<group>";
+		};
+		ABB3E6002C87442B0054E7DF /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				ABB3E6012C8744450054E7DF /* SimilarMovieCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -468,6 +479,7 @@
 				AB9A07342C85F2F20090F57E /* TableView+Extensions.swift in Sources */,
 				AB9A07372C85F2F20090F57E /* UIImage+Extensions.swift in Sources */,
 				AB9A07552C860D720090F57E /* Router.swift in Sources */,
+				ABB3E6022C8744450054E7DF /* SimilarMovieCell.swift in Sources */,
 				AB9A074C2C85F5F00090F57E /* HomeViewController.swift in Sources */,
 				AB9A07532C860CA60090F57E /* HomeViewModel.swift in Sources */,
 				AB9E209E2C86E4EE001F707F /* DetailViewModel.swift in Sources */,

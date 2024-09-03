@@ -47,12 +47,6 @@ private extension HomeViewController {
             guard let self else { return }
             view.backgroundColor = .systemYellow
             tableView.backgroundColor = .white
-            
-            let standardAppearance = UINavigationBarAppearance()
-            standardAppearance.backgroundColor = .systemYellow
-            navigationController?.navigationBar.standardAppearance = standardAppearance
-            navigationController?.navigationBar.scrollEdgeAppearance = standardAppearance
-            
         }
                 
         makeSearchBar()

@@ -7,24 +7,28 @@
 
 import Foundation
 
+//MARK: - HomeViewController
 protocol HomeViewModelProtocol: AnyObject {
     func fetchNowPlayingMovies(page: Int?)
     var movies: MoviesResponse? {get}
 }
 
+//MARK: - HomeViewModelDelegate
 protocol HomeViewModelDelegate: AnyObject {
     func reloadData()
 }
 
+//MARK: - HomeViewModel
 final class HomeViewModel {
     private var service = MoviesService()
     var movies: MoviesResponse? = nil
-    var delegate: HomeViewModelDelegate?
+    weak var delegate: HomeViewModelDelegate?
 }
 
+//MARK: - HomeViewModelProtocol
 extension HomeViewModel: HomeViewModelProtocol {
     func fetchNowPlayingMovies(page: Int?) {
-        NetworkManager.shared.request(Router.nowPlaying(page: page), decodeToType: MoviesResponse.self) { [weak self] result in
+        service.fetchNowPlayingMovies(page: page) { [weak self] result in
             guard let self else { return }
             switch result {
             case .success(let data):

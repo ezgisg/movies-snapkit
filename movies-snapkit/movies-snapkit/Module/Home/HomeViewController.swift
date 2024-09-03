@@ -9,21 +9,35 @@ import Foundation
 import UIKit
 import SnapKit
 
+//MARK: - HomeViewController
 class HomeViewController: UIViewController {
     
+    //MARK: - UI Components
     let tableView: UITableView = UITableView()
     let searchBar: UISearchBar = UISearchBar()
     
+    //MARK: - Module Components
     private var viewModel = HomeViewModel()
 
+    //MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         viewModel.delegate = self
         viewModel.fetchNowPlayingMovies(page: 1)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
 }
 
+//MARK: - UI Setups
 private extension HomeViewController {
     final func setupUI() {
         view.addSubview(tableView)
@@ -33,8 +47,14 @@ private extension HomeViewController {
             guard let self else { return }
             view.backgroundColor = .systemYellow
             tableView.backgroundColor = .white
+            
+            let standardAppearance = UINavigationBarAppearance()
+            standardAppearance.backgroundColor = .systemYellow
+            navigationController?.navigationBar.standardAppearance = standardAppearance
+            navigationController?.navigationBar.scrollEdgeAppearance = standardAppearance
+            
         }
-        
+                
         makeSearchBar()
         makeTableView()
     }
@@ -52,6 +72,7 @@ private extension HomeViewController {
     
     final func makeTableView() {
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.register(cellWithClass: MovieCell.self)
         tableView.estimatedRowHeight = 200
         tableView.snp.makeConstraints { make in
@@ -62,6 +83,7 @@ private extension HomeViewController {
     }
 }
 
+//MARK: - UITableViewDataSource
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.movies?.results?.count ?? 0
@@ -75,8 +97,20 @@ extension HomeViewController: UITableViewDataSource {
     
 }
 
+//MARK: - UITableViewDelegate
+extension HomeViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let movieID = viewModel.movies?.results?[indexPath.row].id else { return }
+        let detailViewModel = DetailViewModel(movieID: movieID)
+        let detailViewController = DetailViewController(viewModel: detailViewModel)
+        navigationController?.pushViewController(detailViewController, animated: true)
+    }
+}
+
+//MARK: - HomeViewModelDelegate
 extension HomeViewController: HomeViewModelDelegate {
     func reloadData() {
         tableView.reloadData()
     }
 }
+

@@ -1,0 +1,51 @@
+//
+//  DetailViewModel.swift
+//  movies-snapkit
+//
+//  Created by Ezgi Sümer Günaydın on 3.09.2024.
+//
+
+import Foundation
+
+//MARK: - DetailViewModelProtocol
+protocol DetailViewModelProtocol: AnyObject {
+    var movieID: Int { get set }
+    var movieDetail: MovieDetailsResponse? { get set }
+    var delegate: DetailViewModelDelegate? { get set }
+    
+    func fetchDetail()
+}
+
+//MARK: - DetailViewModelDelegate
+protocol DetailViewModelDelegate: AnyObject {
+    func reloadData()
+}
+
+//MARK: - DetailViewModel
+final class DetailViewModel {
+    var movieID: Int
+    var movieDetail: MovieDetailsResponse?
+    weak var delegate: DetailViewModelDelegate?
+    private var service = MoviesService()
+  
+    
+    init(movieID: Int) {
+        self.movieID = movieID
+    }
+}
+
+//MARK: - DetailViewModelProtocol
+extension DetailViewModel: DetailViewModelProtocol {
+    func fetchDetail() {
+        service.fetchMovieDetails(movieId: Int32(movieID)) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(let data):
+                movieDetail = data
+                delegate?.reloadData()
+            case .failure(let error):
+                debugPrint(error.localizedDescription)
+            }
+        }
+    }
+}

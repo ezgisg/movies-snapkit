@@ -12,6 +12,7 @@ import Kingfisher
 ///To load image from url with KF
 extension UIImageView {
     func loadImage(with path: String, cornerRadius: CGFloat = 10) {
+        self.clipsToBounds = true
         kf.indicatorType = .activity
         contentMode = .scaleToFill
         layer.cornerRadius = cornerRadius

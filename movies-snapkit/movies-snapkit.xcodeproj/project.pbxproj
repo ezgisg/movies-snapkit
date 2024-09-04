@@ -48,6 +48,7 @@
 		AB9E209C2C86E4E2001F707F /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9E209B2C86E4E2001F707F /* DetailViewController.swift */; };
 		AB9E209E2C86E4EE001F707F /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9E209D2C86E4EE001F707F /* DetailViewModel.swift */; };
 		ABB3E6022C8744450054E7DF /* SimilarMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB3E6012C8744450054E7DF /* SimilarMovieCell.swift */; };
+		ABB3E6092C8843770054E7DF /* TinyConstraints in Frameworks */ = {isa = PBXBuildFile; productRef = ABB3E6082C8843770054E7DF /* TinyConstraints */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +121,7 @@
 				AB9A074F2C8607020090F57E /* SnapKit in Frameworks */,
 				AB9A07042C85F2AA0090F57E /* Alamofire in Frameworks */,
 				AB9A07062C85F2AA0090F57E /* AlamofireDynamic in Frameworks */,
+				ABB3E6092C8843770054E7DF /* TinyConstraints in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,6 +338,7 @@
 				AB9A07082C85F2BA0090F57E /* Kingfisher */,
 				AB9A074E2C8607020090F57E /* SnapKit */,
 				AB9A07502C8607020090F57E /* SnapKit-Dynamic */,
+				ABB3E6082C8843770054E7DF /* TinyConstraints */,
 			);
 			productName = "movies-snapkit";
 			productReference = AB9A06CC2C85F2760090F57E /* movies-snapkit.app */;
@@ -413,6 +416,7 @@
 				AB9A07022C85F2AA0090F57E /* XCRemoteSwiftPackageReference "Alamofire" */,
 				AB9A07072C85F2BA0090F57E /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				AB9A074D2C8607020090F57E /* XCRemoteSwiftPackageReference "SnapKit" */,
+				ABB3E6072C8843770054E7DF /* XCRemoteSwiftPackageReference "TinyConstraints" */,
 			);
 			productRefGroup = AB9A06CD2C85F2760090F57E /* Products */;
 			projectDirPath = "";
@@ -849,6 +853,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		ABB3E6072C8843770054E7DF /* XCRemoteSwiftPackageReference "TinyConstraints" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/roberthein/TinyConstraints.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -876,6 +888,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AB9A074D2C8607020090F57E /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = "SnapKit-Dynamic";
+		};
+		ABB3E6082C8843770054E7DF /* TinyConstraints */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ABB3E6072C8843770054E7DF /* XCRemoteSwiftPackageReference "TinyConstraints" */;
+			productName = TinyConstraints;
 		};
 /* End XCSwiftPackageProductDependency section */
 

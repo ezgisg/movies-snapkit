@@ -86,5 +86,4 @@ private extension SimilarMovieCell {
         nameLabel.width(to: image)
     }
     
-
 }

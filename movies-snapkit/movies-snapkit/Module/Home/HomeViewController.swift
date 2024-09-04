@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SnapKit
+import TinyConstraints
 
 //MARK: - HomeViewController
 class HomeViewController: UIViewController {
@@ -49,11 +50,21 @@ private extension HomeViewController {
             tableView.backgroundColor = .white
         }
                 
-        makeSearchBar()
-        makeTableView()
+//        snapkitFunctions()
+        tinyConstraintsFunctions()
     }
     
-    final func makeSearchBar() {
+    final func snapkitFunctions() {
+        makeSearchBarWithSnapkit()
+        makeTableViewWithSnapkit()
+    }
+    
+    final func tinyConstraintsFunctions() {
+        makeSearchBarWithTiny()
+        makeTableViewWithTiny()
+    }
+    
+    final func makeSearchBarWithSnapkit() {
         searchBar.layer.cornerRadius = 8
         searchBar.clipsToBounds = true
         searchBar.snp.makeConstraints { make in
@@ -64,7 +75,17 @@ private extension HomeViewController {
         }
     }
     
-    final func makeTableView() {
+    final func makeSearchBarWithTiny() {
+        searchBar.layer.cornerRadius = 8
+        searchBar.clipsToBounds = true
+        searchBar.height(60)
+        searchBar.leftToSuperview(offset: 10)
+        searchBar.rightToSuperview(offset: -10)
+        searchBar.topToSuperview(offset: 0, usingSafeArea: true)
+
+    }
+    
+    final func makeTableViewWithSnapkit() {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(cellWithClass: MovieCell.self)
@@ -74,6 +95,18 @@ private extension HomeViewController {
             make.top.equalTo(searchBar.snp.bottom).offset(10)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
+    }
+    
+    final func makeTableViewWithTiny() {
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(cellWithClass: MovieCell.self)
+        tableView.estimatedRowHeight = 200
+        
+        tableView.rightToSuperview()
+        tableView.leftToSuperview()
+        tableView.topToBottom(of: searchBar, offset: 10)
+        tableView.bottomToSuperview(usingSafeArea: true)
     }
 }
 
